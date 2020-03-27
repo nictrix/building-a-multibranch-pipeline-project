@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bash '''#!/usr/bin/env bash
+                sh '''#!/usr/bin/env bash
                         source ~/.bash_profile;
                         rbenv local 2.5.0;
                         gem install bundler;
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bash '''#!/usr/bin/env bash
+                sh '''#!/usr/bin/env bash
                         source ~/.bash_profile;
                         rbenv local 2.5.0;
 
@@ -45,7 +45,7 @@ pipeline {
                 branch 'production'
             }
             steps {
-                bash '''#!/usr/bin/env bash
+                sh '''#!/usr/bin/env bash
                         source ~/.bash_profile;
                         rbenv local 2.5.0;
 
