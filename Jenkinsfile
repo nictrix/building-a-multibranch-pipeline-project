@@ -6,14 +6,22 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                  sh(script: '#!/usr/bin/env bash; source ~/.bash_profile; rbenv local 2.5.0; gem install bundler; bundle install')
-                }
+                bash '''#!/usr/bin/env bash
+                        source ~/.bash_profile;
+                        rbenv local 2.5.0;
+                        gem install bundler;
+                        bundle install;
+                '''
             }
         }
         stage('Test') {
             steps {
-                sh 'bundle exec rake test'
+                bash '''#!/usr/bin/env bash
+                        source ~/.bash_profile;
+                        rbenv local 2.5.0;
+
+                        bundle exec rake test
+                '''
             }
         }
         stage('Deliver for development') {
@@ -21,7 +29,13 @@ pipeline {
                 branch 'development'
             }
             steps {
-                sh 'bundle exec rake db:migrate; bundle exec rackup --host 0.0.0.0'
+                bash '''#!/usr/bin/env bash
+                        source ~/.bash_profile;
+                        rbenv local 2.5.0;
+
+                        bundle exec rake db:migrate;
+                        bundle exec rackup --host 0.0.0.0;
+                '''
                 input message: 'Click "Proceed" to continue'
                 sh 'echo "deleting!"'
             }
@@ -31,7 +45,13 @@ pipeline {
                 branch 'production'
             }
             steps {
-                sh 'bundle exec rake db:migrate; bundle exec rackup --host 0.0.0.0'
+                bash '''#!/usr/bin/env bash
+                        source ~/.bash_profile;
+                        rbenv local 2.5.0;
+
+                        bundle exec rake db:migrate;
+                        bundle exec rackup --host 0.0.0.0;
+                '''
                 input message: 'Click "Proceed" to continue'
                 sh 'echo "deployed!"'
             }
