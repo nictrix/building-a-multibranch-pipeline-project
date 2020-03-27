@@ -10,6 +10,10 @@ pipeline {
                         source ~/.bash_profile;
                         rbenv local 2.5.0;
                         gem install bundler;
+
+                        ls -la;
+                        env;
+
                         bundle install;
                 '''
             }
