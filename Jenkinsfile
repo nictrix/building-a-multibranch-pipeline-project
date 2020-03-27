@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                  sh(script: 'source ~/.bash_profile; rbenv local 2.5.0; gem install bundler; bundle install')
+                  sh(script: '#!/usr/bin/env bash; source ~/.bash_profile; rbenv local 2.5.0; gem install bundler; bundle install')
                 }
             }
         }
