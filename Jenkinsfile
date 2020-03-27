@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'bundle install'
+                sh 'source ~/.bash_profile; rbenv local 2.5.0; gem install bundler; bundle install'
             }
         }
         stage('Test') {
